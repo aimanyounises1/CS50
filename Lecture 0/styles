@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="eng">
+    <title>
+        Styles 
+    </title>
+    <style>
+        .baz{
+            color:blue;
+        }
+    </style>
+    <body>
+        <h1 class="baz">This is header one </h1>
+        <h1 class="baz">This is header two</h1>
+        <h1>This is header three</h1>
+    </body>
+
+</html>
