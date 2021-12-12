@@ -8,12 +8,20 @@
     <body>
         <div id="app"></div>
         <script type ="text/babel">
+            function Hello(props){
+                return (
+                    <h1>Hello  , {props.name} </h1>
+                );
+            }
+
             function App(){
-                const x  = 1;
-                const y = 2;
+                
                 return (<div>
-                      {x + y}
+                      <Hello name = "Chandler" />
+                      <Hello  name   ="Monica"/>
+                      <Hello name = "Joe" />
                       </div>
+
                     );
             }
             ReactDOM.render(<App /> , document.querySelector('#app'));
