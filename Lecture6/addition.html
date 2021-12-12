@@ -2,6 +2,20 @@
 <html lang="en">
     <head>
         <title>Addition</title>
+        <style >
+            #app {
+                text-align : center;
+                font-family:sans-serif;
+                
+            }
+            #problem {
+                font-size : 72px;
+            }
+            .incorrect{
+                color:red;
+            }
+        </style>
+
     <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.18.1/babel.min.js"></script>
@@ -15,7 +29,8 @@
                    num1: 2 ,
                    num2 :4 ,
                    response : "", // what the user types in.
-                   score : 0
+                   score : 0 ,
+                   incorrect: false
                });
                function updateResponse(event){
                     setState({
@@ -34,20 +49,25 @@
                                 ...state,
                                 num1 : Math.ceil(Math.random() * 10),
                                 num2 : Math.ceil(Math.random() * 10),
-                                score : state.score + 1
+                                score : state.score + 1,
+                                response :"", // clear the response
+                                incorrect : false 
                             });
 
                         }else{
                             setState({
                                 ...state,
-                                score :state.score - 1
+                                score :state.score - 1 ,
+                                response :"", // clear the response
+                                incorrect : true
+
                             });
                         }
                     }
                }
                 return (
                     <div>
-                        <div>
+                        <div className= {state.incorrect ?"incorrect" : ""} id ="problem">
                             {state.num1} + {state.num2}
                             </div>
                             <input onKeyPress = {inputKeyPress} onChange = {updateResponse} value = {state.response}/>
