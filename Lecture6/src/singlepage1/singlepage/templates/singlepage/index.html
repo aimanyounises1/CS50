@@ -1,0 +1,37 @@
+{% extends 'singlepage/layout.html' %}
+{% block body %}
+<h1>Single Page</h1>
+<script>
+    window.onpopstate = function(event){
+         showSection(event.state.section);
+    }
+
+    function showSection(section){
+        // fetch to the sections
+        fetch(`/sections/${section}`)
+        .then(response => response.text()) // get the text 
+        .then(text => {
+            document.querySelector('#content').innerHTML = text; // init the text
+            // inside the div with id content
+        });
+    }
+        document.addEventListener('DOMContentLoaded' , function (){
+            document.querySelectorAll('button').forEach(button =>{
+            button.onclick = function () {
+                const section = this.dataset.section;
+                console.log(section);
+                history.pushState({'section': section} , "" , `section${section}`);
+                showSection(section);// access the data-page attribute
+            }});
+        });
+    </script>
+
+<button data-section="1"> Section 1</button>
+<button data-section="2">Section 2</button>
+<button data-section="3">Section 3</button>
+
+<div id ="content">
+
+    </div>
+
+{% endblock %}
