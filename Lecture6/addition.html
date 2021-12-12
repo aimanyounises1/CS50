@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Addition</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.18.1/babel.min.js"></script>
+    </head>
+    <body>
+        <div id="app"></div>
+        <script type ="text/babel">
+           
+            function App(){
+               const [state , setState] = React.useState({
+                   num1: 2 ,
+                   num2 :4 ,
+                   response : "", // what the user types in.
+                   score : 0
+               });
+               function updateResponse(event){
+                    setState({
+                        ...state, // keeps everything the same  
+                        response : event.target.value
+                    });
+               }
+               function inputKeyPress(event){
+                    // checking if the key is entered
+                    if(event.key === "Enter"){
+                        const answer = parseInt(state.response);
+                        if(state.num1 + state.num2 === answer){
+                            // User got the question right
+                            console.log(answer);
+                            setState({
+                                ...state,
+                                num1 : Math.ceil(Math.random() * 10),
+                                num2 : Math.ceil(Math.random() * 10),
+                                score : state.score + 1
+                            });
+
+                        }else{
+                            setState({
+                                ...state,
+                                score :state.score - 1
+                            });
+                        }
+                    }
+               }
+                return (
+                    <div>
+                        <div>
+                            {state.num1} + {state.num2}
+                            </div>
+                            <input onKeyPress = {inputKeyPress} onChange = {updateResponse} value = {state.response}/>
+                            <div >Score : {state.score}</div> 
+                        </div>
+
+                      
+                    );
+            }
+            ReactDOM.render(<App /> , document.querySelector('#app'));
+        </script>
+    </body>
+    </html>
